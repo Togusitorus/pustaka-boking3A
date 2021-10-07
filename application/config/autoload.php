@@ -62,7 +62,7 @@ $autoload['libraries'] = array();
 
 /*
 | -------------------------------------------------------------------
-|  Auto-load Drivers
+|  Auto-load config files
 | -------------------------------------------------------------------
 | These classes are located in system/libraries/ or in your
 | application/libraries/ directory, but are also placed inside their
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array();
+$autoload['helper'] = array('url','file');
 
 /*
 | -------------------------------------------------------------------
