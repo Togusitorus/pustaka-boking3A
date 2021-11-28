@@ -60,16 +60,17 @@ class User extends CI_Controller
             if ($upload_image) {
                 $config['upload_path'] = './assets/img/profile/';
                 $config['allowed_types'] = 'gif|jpg|png';
-                $config['max_size'] = '3000';
-                $config['max_width'] = '1024';
-                $config['max_height'] = '1000';
+                $config['max_size'] = '300000';
+                $config['max_width'] = '100240';
+                $config['max_height'] = '100000';
                 $config['file_name'] = 'pro' . time();
     
                 $this->load->library('upload', $config);
     
                 if ($this->upload->do_upload('image')) {
                     $gambar_lama = $data['user']['image'];
-                    if ($gambar_lama != 'default.jpg') { unlink(FCPATH . 'assets/img/profile/' . $gambar_lama);
+                    if ($gambar_lama != 'default.jpg') { 
+                        unlink(FCPATH . 'assets/img/profile/' . $gambar_lama);
                     }
  
                     $gambar_baru = $this->upload->data('file_name');
