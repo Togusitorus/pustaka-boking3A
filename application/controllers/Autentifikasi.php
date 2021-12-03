@@ -2,17 +2,17 @@
 
 class Autentifikasi extends CI_Controller
 {
-    
+
     public function index()
     {
-        
+
         //jika statusnya sudah login, maka tidak bisa mengakses halaman login alias dikembalikan ke tampilan user
-        if($this->session->userdata('email')){
+        if ($this->session->userdata('email')) {
             redirect('admin');
         }
-        
-        $this->form_validation->set_rules('email', 'Alamat Email', 'required|trim|valid_email', [ 
-            'required' => 'Email Harus diisi!!', 
+
+        $this->form_validation->set_rules('email', 'Alamat Email', 'required|trim|valid_email', [
+            'required' => 'Email Harus diisi!!',
             'valid_email' => 'Email Tidak Benar!!'
         ]);
         $this->form_validation->set_rules('password', 'Password', 'required|trim', [
@@ -20,7 +20,7 @@ class Autentifikasi extends CI_Controller
         ]);
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Login';
-            $data['user'] = 'Queen';
+            $data['user'] = 'Queen Faradiba Al Isra Syam';
             //kata 'login' merupakan nilai dari variabel judul dalam array $data dikirimkan ke view aute_header
             $this->load->view('templates/aute_header', $data);
             $this->load->view('autentifikasi/login');
@@ -36,13 +36,13 @@ class Autentifikasi extends CI_Controller
         $password = $this->input->post('password', true);
 
         $user = $this->ModelUser->cekData(['email' => $email])->row_array();
-        
+
         //jika usernya ada
         if ($user) {
             //jika user sudah aktif
             if ($user['is_active'] == 1) {
                 //cek password
-                if (password_verify($password, $user['password'])) { 
+                if (password_verify($password, $user['password'])) {
                     $data = [
                         'email' => $user['email'],
                         'role_id' => $user['role_id']
@@ -51,7 +51,7 @@ class Autentifikasi extends CI_Controller
 
                     $this->session->set_userdata($data);
 
-                    if ($user['role_id'] == 1) { 
+                    if ($user['role_id'] == 1) {
                         redirect('admin');
                     } else {
                         if ($user['image'] == 'default.jpg') {
@@ -77,7 +77,7 @@ class Autentifikasi extends CI_Controller
     {
         $this->load->view('autentifikasi/blok');
     }
- 
+
     public function gagal()
     {
         $this->load->view('autentifikasi/gagal');
@@ -140,6 +140,8 @@ class Autentifikasi extends CI_Controller
         }
     }
 
-
-
+    public function logout()
+    {
+        redirect('autentifikasi/index');
+    }
 }
